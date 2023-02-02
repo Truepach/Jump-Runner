@@ -704,6 +704,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: d70170446aa035f40a2429d04ab83ea6, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d70170446aa035f40a2429d04ab83ea6, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -769,10 +773,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionParticle: {fileID: 583938558}
   dirtParticle: {fileID: 465087704}
-  jumpForce: 700
-  gravityModifier: 1.5
   doubleJumpUsed: 0
-  doubleJumpForce: 400
   doubleSpeed: 0
   isOnGround: 1
   gameOver: 0
