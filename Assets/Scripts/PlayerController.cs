@@ -8,10 +8,7 @@ public class PlayerController : MonoBehaviour
     private Animator playerAnim;
     public ParticleSystem explosionParticle;
     public ParticleSystem dirtParticle;
-    public float jumpForce = 10;
-    public float gravityModifier;
     public bool doubleJumpUsed = false;
-    public float doubleJumpForce;
     public bool doubleSpeed = false;
     public bool isOnGround = true;
     public bool gameOver = false;
@@ -24,7 +21,7 @@ public class PlayerController : MonoBehaviour
     {
         playerRb = GetComponent<Rigidbody>();
         playerAnim = GetComponent<Animator>();
-        Physics.gravity *= gravityModifier;
+        Physics.gravity *= GetComponent<Player>().gravityModifier;
         playerAudio = GetComponent<AudioSource>();
     }
 
@@ -33,7 +30,7 @@ public class PlayerController : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space) && isOnGround && !gameOver)
         {
-            playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            playerRb.AddForce(Vector3.up * GetComponent<Player>().jumpForce, ForceMode.Impulse);
             isOnGround = false;
             playerAnim.SetTrigger("Jump_trig");
             dirtParticle.Stop();
@@ -43,7 +40,7 @@ public class PlayerController : MonoBehaviour
         } else if(Input.GetKeyDown(KeyCode.Space) && !isOnGround && !doubleJumpUsed)
         {
             doubleJumpUsed = true;
-            playerRb.AddForce(Vector3.up * doubleJumpForce, ForceMode.Impulse);
+            playerRb.AddForce(Vector3.up * GetComponent<Player>().doubleJumpForce, ForceMode.Impulse);
             playerAnim.SetTrigger("Running_Jump");
             playerAudio.PlayOneShot(jumpSound, 1.0f);
         }
