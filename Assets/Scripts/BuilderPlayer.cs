@@ -37,7 +37,7 @@ public class BuilderPlayer : Player
 
     public override void PlayerStartRotation()
     {
-        transform.rotation = Quaternion.Euler(0f, 9f, 0f);
+        transform.rotation = Quaternion.Euler(0f, 90f, 0f);
     }
 
     public override void PlayerStartScale()

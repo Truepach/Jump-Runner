@@ -8,14 +8,20 @@ using UnityEngine.SceneManagement;
 public class MenuUiHandler : MonoBehaviour
 {
 
+    /// <summary>
+    /// Loads the Character Select Scene.
+    /// </summary>
     public void CharacterSelect()
     {
         SceneManager.LoadScene(1);
     }
 
-    public void StartGame()
+    /// <summary>
+    /// Loads the Title Scene.
+    /// </summary>
+    public void BackToMainMenu()
     {
-        SceneManager.LoadScene(2);    
+        SceneManager.LoadScene(0);
     }
 
     /// <summary>
@@ -30,6 +36,12 @@ public class MenuUiHandler : MonoBehaviour
 #else
         Application.Quit();
 #endif
+    }
+
+    public void SelectFarmer()
+    {
+        //SpawnFarmer()
+        SceneManager.LoadScene(2);
     }
 
 }
