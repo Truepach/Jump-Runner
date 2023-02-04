@@ -38,10 +38,41 @@ public class MenuUiHandler : MonoBehaviour
 #endif
     }
 
+
+  /*  private void Awake()
+    {
+        LoadSelectedCharacter loadSelectedCharacter = gameObject.AddComponent<LoadSelectedCharacter>();
+        loadSelectedCharacter.Start();
+    } */
+    /// <summary>
+    /// On the Character Select Scene this will select FarmerPlayer character 
+    /// And will load Game Scene
+    /// </summary>
     public void SelectFarmer()
     {
-        //SpawnFarmer()
+        PlayerPrefs.SetString("SelectedCharacter", "Farmer");
         SceneManager.LoadScene(2);
     }
 
+    /// <summary>
+    /// On the Character Select Scene this will select NursePlayer character 
+    /// And will load Game Scene
+    /// </summary>
+
+    public void SelectNurse()
+    {
+        PlayerPrefs.SetString("SelectedCharacter", "Nurse");
+        SceneManager.LoadScene(2);
+    }
+
+    /// <summary>
+    /// On the Character Select Scene this will select BuilderPlayer character 
+    /// And will load Game Scene
+    /// </summary>
+
+    public void SelectBuilder()
+    {
+        PlayerPrefs.SetString("SelectedCharacter", "Builder");
+        SceneManager.LoadScene(2);
+    }
 }

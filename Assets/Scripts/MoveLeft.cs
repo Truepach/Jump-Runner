@@ -11,12 +11,13 @@ public class MoveLeft : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
+        StartCoroutine(InitializePlayerControllerScript());
     }
 
     // Update is called once per frame
     void Update()
     {
+        StartCoroutine(CheckPlayerControllerScript());
         if (playerControllerScript.gameOver == false)
         {
             if (playerControllerScript.doubleSpeed)
@@ -33,4 +34,17 @@ public class MoveLeft : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    IEnumerator InitializePlayerControllerScript()
+    {
+        yield return new WaitUntil(() => playerControllerScript != null);
+        playerControllerScript = GetComponent<PlayerController>();
+    }
+
+    IEnumerator CheckPlayerControllerScript()
+    {
+        yield return new WaitUntil(() => playerControllerScript != null);
+
+    }
+
 }

@@ -15,21 +15,18 @@ public class Player : MonoBehaviour
         doubleJumpForce = 400f;
         gravityModifier = 1.5f;
     }
-    public virtual void PlayerStartPosition()
+    public virtual Vector3 PlayerStartPosition()
     {
-        Vector3 startPos = new Vector3(-5, 0, 0);
-        transform.position = startPos;
+        return new Vector3(-5, 0, 0);
     }
 
-    public virtual void PlayerStartRotation()
+    public virtual Quaternion PlayerStartRotation()
     {
-        transform.rotation = Quaternion.Euler(0f, 90f, 0f);
+        return Quaternion.Euler(0f, 90f, 0f);
     }
 
     public virtual void PlayerStartScale()
     {
         transform.localScale = new Vector3(1f, 1f, 1f);
     }
-
-
 }

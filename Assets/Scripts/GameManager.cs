@@ -11,11 +11,18 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
+        StartCoroutine(InitializePlayerControllerScript());
         score = 0;
-        playerControllerScript.gameOver = true;
         StartCoroutine(PlayIntro());
     }
+
+    IEnumerator InitializePlayerControllerScript()
+    {
+        yield return new WaitUntil(() => playerControllerScript != null);
+        playerControllerScript = GetComponent<PlayerController>();
+        playerControllerScript.gameOver = true;
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -35,6 +42,7 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator PlayIntro()
     {
+        yield return new WaitUntil(() => playerControllerScript != null);
         Vector3 startPos = playerControllerScript.transform.position;
         Vector3 endPos = startingPoint.position;
         float journeyLength = Vector3.Distance(startPos, endPos);
