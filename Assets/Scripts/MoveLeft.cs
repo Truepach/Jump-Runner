@@ -7,6 +7,7 @@ public class MoveLeft : MonoBehaviour
     private float speed = 30f;
     private PlayerController playerControllerScript;
     private float leftBound = -30f;
+    public bool gameOver = true;
 
     // Start is called before the first frame update
     void Start()
@@ -18,16 +19,10 @@ public class MoveLeft : MonoBehaviour
     void Update()
     {
         StartCoroutine(CheckPlayerControllerScript());
-        if (playerControllerScript.gameOver == false)
+        if (gameOver == false)
         {
-            if (playerControllerScript.doubleSpeed)
-            {
-                transform.Translate(Vector3.left * Time.deltaTime * (speed * 2));
-            }
-            else
-            {
-                transform.Translate(Vector3.left * Time.deltaTime * speed);
-            }
+           transform.Translate(Vector3.left * Time.deltaTime * speed);
+
         }
         if (transform.position.x < leftBound && gameObject.CompareTag("Obstacle"))
         {
@@ -47,4 +42,13 @@ public class MoveLeft : MonoBehaviour
 
     }
 
+    public void SetGameOverTrue()
+    {
+        gameOver = true;
+    }
+
+    public void SetGameOverFalse() 
+    {
+        gameOver = false;
+    }
 }

@@ -8,37 +8,33 @@ public class GameManager : MonoBehaviour
     private PlayerController playerControllerScript;
     public Transform startingPoint;
     public float lerpSpeed;
+    public MoveLeft moveLeftScript;
+    public PlayerSelectedData playerSelectedData;
+
     // Start is called before the first frame update
     void Start()
     {
+        moveLeftScript = GameObject.Find("Background").GetComponent<MoveLeft>();
+        //playerSelectedData = GameObject.Find("PlayerSelected").GetComponent<PlayerSelectedData>();
+        //string character = playerSelectedData.GetSelectedCharacter() + "Player(Clone)";
+        //playerControllerScript = GameObject.Find(character).GetComponent<PlayerController>();
+
         StartCoroutine(InitializePlayerControllerScript());
+       // playerControllerScript = GameObject.Find(loadSelectedCharacter.character).GetComponent<PlayerController>();
         score = 0;
         StartCoroutine(PlayIntro());
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
     }
 
     IEnumerator InitializePlayerControllerScript()
     {
         yield return new WaitUntil(() => playerControllerScript != null);
         playerControllerScript = GetComponent<PlayerController>();
-        playerControllerScript.gameOver = true;
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (!playerControllerScript.gameOver)
-        {
-            if (playerControllerScript.doubleSpeed)
-            {
-                score += 2;
-            }
-            else
-            {
-                score++;
-            }
-            Debug.Log(score);
-        }
     }
     IEnumerator PlayIntro()
     {
@@ -59,8 +55,8 @@ public class GameManager : MonoBehaviour
             fractionOfJourney);
             yield return null;
         }
-        playerControllerScript.GetComponent<Animator>().SetFloat("Speed_Multiplier",1.0f);
-        playerControllerScript.gameOver = false;
+        playerControllerScript.GetComponent<Animator>().SetFloat("Speed_Multiplier", 1.0f);
+        moveLeftScript.SetGameOverFalse();
 
     }
 }

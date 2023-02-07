@@ -8,35 +8,35 @@ public class LoadSelectedCharacter : MonoBehaviour
     public GameObject farmerPrefab;
     public GameObject nursePrefab;
     public GameObject builderPrefab;
+    public string character;
 
     public void Start()
     {
-        string selectedCharacterString = PlayerPrefs.GetString("SelectedCharacter");
+        string selectedCharacterString = PlayerSelectedData.instance.GetSelectedCharacter();
 
         if (selectedCharacterString == "Farmer")
         {
-            FarmerPlayer farmerPlayer = GetComponent<FarmerPlayer>();
-            Vector3 startPos = farmerPlayer.PlayerStartPosition();
-            Quaternion startRotation = farmerPlayer.PlayerStartRotation();
+            Vector3 startPos = farmerPrefab.GetComponent<FarmerPlayer>().PlayerStartPosition();
+            Quaternion startRotation = farmerPrefab.GetComponent<FarmerPlayer>().PlayerStartRotation();
             selectedCharacter = Instantiate(farmerPrefab, startPos, startRotation);
         }
         else if (selectedCharacterString == "Nurse")
         {
-            NursePlayer nursePlayer = GetComponent<NursePlayer>();
-            Vector3 startPos = nursePlayer.PlayerStartPosition();
-            Quaternion startRotation = nursePlayer.PlayerStartRotation();
+            Vector3 startPos = nursePrefab.GetComponent<NursePlayer>().PlayerStartPosition();
+            Quaternion startRotation = nursePrefab.GetComponent<NursePlayer>().PlayerStartRotation();
             selectedCharacter = Instantiate(nursePrefab, startPos, startRotation);
         }
         else if (selectedCharacterString == "Builder")
         {
-            BuilderPlayer builderPlayer = GetComponent<BuilderPlayer>();
-            Vector3 startPos = builderPlayer.PlayerStartPosition();
-            Quaternion startRotation = builderPlayer.PlayerStartRotation();
+            Vector3 startPos = builderPrefab.GetComponent<BuilderPlayer>().PlayerStartPosition();
+            Quaternion startRotation = builderPrefab.GetComponent<BuilderPlayer>().PlayerStartRotation();
             selectedCharacter = Instantiate(builderPrefab, startPos, startRotation);
         }
         else
         {
-            Debug.LogError("No selected character found in PlayerPrefs.");
+            Debug.LogError("No selected character found in PlayerSelectedData.");
         }
+
+        character = selectedCharacterString;
     }
 }

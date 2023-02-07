@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,6 +6,13 @@ using UnityEngine.SceneManagement;
 [DefaultExecutionOrder(1000)]
 public class MenuUiHandler : MonoBehaviour
 {
+    private LoadSelectedCharacter loadSelectedCharacter;
+
+    private void Awake()
+    {
+        loadSelectedCharacter = gameObject.AddComponent<LoadSelectedCharacter>();
+        loadSelectedCharacter.Start();
+    }
 
     /// <summary>
     /// Loads the Character Select Scene.
@@ -31,26 +37,18 @@ public class MenuUiHandler : MonoBehaviour
     {
 #if UNITY_EDITOR
         EditorApplication.ExitPlaymode();
-#elif UNITY_WEBGL
-        Application.OpenURL("https://play.unity.com/u/Truepach");
 #else
         Application.Quit();
 #endif
     }
 
-
-  /*  private void Awake()
-    {
-        LoadSelectedCharacter loadSelectedCharacter = gameObject.AddComponent<LoadSelectedCharacter>();
-        loadSelectedCharacter.Start();
-    } */
     /// <summary>
     /// On the Character Select Scene this will select FarmerPlayer character 
     /// And will load Game Scene
     /// </summary>
     public void SelectFarmer()
     {
-        PlayerPrefs.SetString("SelectedCharacter", "Farmer");
+        PlayerSelectedData.instance.SetSelectedCharacter("Farmer");
         SceneManager.LoadScene(2);
     }
 
@@ -61,7 +59,7 @@ public class MenuUiHandler : MonoBehaviour
 
     public void SelectNurse()
     {
-        PlayerPrefs.SetString("SelectedCharacter", "Nurse");
+        PlayerSelectedData.instance.SetSelectedCharacter("Nurse");
         SceneManager.LoadScene(2);
     }
 
@@ -72,7 +70,7 @@ public class MenuUiHandler : MonoBehaviour
 
     public void SelectBuilder()
     {
-        PlayerPrefs.SetString("SelectedCharacter", "Builder");
+        PlayerSelectedData.instance.SetSelectedCharacter("Builder");
         SceneManager.LoadScene(2);
     }
 }
